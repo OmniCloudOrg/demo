@@ -1,25 +1,10 @@
 import React from 'react';
 import { LucideIcon } from 'lucide-react';
 
-interface ButtonProps {
-  children: React.ReactNode;
-  onClick?: () => void;
-  variant?: 'primary' | 'secondary' | 'ghost' | 'danger' | 'icon';
-  size?: 'sm' | 'md' | 'lg';
-  icon?: LucideIcon;
-  iconPosition?: 'left' | 'right';
-  className?: string;
-  fullWidth?: boolean;
-  disabled?: boolean;
-  ariaLabel?: string;
-  type?: 'button' | 'submit' | 'reset';
-  badge?: number;
-}
-
 /**
  * Button component with multiple variants and sizes
  */
-const Button: React.FC<ButtonProps> = ({
+const Button = ({
   children,
   onClick,
   variant = 'primary',

@@ -24,7 +24,7 @@ export const useOutsideClick = <T extends HTMLElement = HTMLDivElement>(callback
     };
   }, [callback]);
 
-  return ref;
+  return ref as RefObject<T>;
 };
 
 export default useOutsideClick;
