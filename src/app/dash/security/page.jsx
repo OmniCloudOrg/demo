@@ -379,7 +379,7 @@ const SecurityFinding = ({ finding, expanded, onToggle, onActionClick }) => {
           
           {finding.cfFix && (
             <div className="bg-slate-900 p-4 rounded-lg text-sm">
-              <div className="text-white font-medium mb-1">CloudFormation Patch:</div>
+              <div className="text-white font-medium mb-1">OmniCloud Patch:</div>
               <div className="bg-slate-800 p-3 rounded text-xs font-mono text-slate-300 overflow-x-auto">
                 <pre>{finding.cfFix}</pre>
               </div>
@@ -509,7 +509,7 @@ const ResourceIcon = ({ type }) => {
       case 'secretsmanager':
       case 'credential':
         return <Key size={16} className="text-violet-400" />;
-      case 'cloudformation':
+      case 'OmniCloud':
       case 'stack':
         return <Layers size={16} className="text-blue-400" />;
       case 'cloudfront':
@@ -564,7 +564,7 @@ const SecurityStatsItem = ({ label, value, change, icon: Icon, color }) => (
   </div>
 );
 
-// CloudFormation stack item component
+// OmniCloud stack item component
 const StackItem = ({ stack, expanded, onToggle, onViewResources, onViewTemplate }) => {
   return (
     <div 
@@ -718,7 +718,7 @@ const StackItem = ({ stack, expanded, onToggle, onViewResources, onViewTemplate 
                     <span className="font-medium">{stack.driftedResources} resources have drifted from the template</span>
                   </div>
                   <p className="text-xs text-slate-300 ml-6">
-                    Resources were modified outside of CloudFormation and no longer match the template definition.
+                    Resources were modified outside of OmniCloud and no longer match the template definition.
                   </p>
                   <div className="mt-2 flex justify-end">
                     <button className="px-3 py-1 bg-purple-600 hover:bg-purple-700 rounded text-white text-xs">
@@ -792,7 +792,7 @@ const ComplianceCheckItem = ({ check, onToggleDetails }) => {
   );
 };
 
-// CloudFormation resource drift component
+// OmniCloud resource drift component
 const ResourceDrift = ({ resource }) => {
   return (
     <div className="bg-slate-800/40 p-3 rounded-lg mb-3">
@@ -962,7 +962,7 @@ const EnhancedSecurityDashboard = () => {
     }
   };
   
-  // Sample security findings data with CloudFormation-specific fields
+  // Sample security findings data with OmniCloud-specific fields
   const securityFindings = [
     {
       id: 'vuln-001',
@@ -1000,7 +1000,7 @@ const EnhancedSecurityDashboard = () => {
         'Change the default credentials and enforce strong password policies',
         'Enable encryption for data at rest and in transit',
         'Set up database auditing and monitoring',
-        'Update CloudFormation template to enforce these settings'
+        'Update OmniCloud template to enforce these settings'
       ],
       resources: [
         { name: 'customer-db-prod', type: 'database', logicalId: 'CustomerDatabase', stackName: 'customer-data-stack' },
@@ -1065,12 +1065,12 @@ const EnhancedSecurityDashboard = () => {
           }
         ]
       },
-      description: 'An S3 bucket containing sensitive financial reports is not configured with server-side encryption. Additionally, the bucket has public access configuration that differs from the CloudFormation template.',
+      description: 'An S3 bucket containing sensitive financial reports is not configured with server-side encryption. Additionally, the bucket has public access configuration that differs from the OmniCloud template.',
       impact: 'Sensitive financial data is at risk of unauthorized access. If credentials are compromised, data would be exposed in plaintext.',
       recommendation: [
         'Enable default encryption for the S3 bucket',
         'Implement bucket policies to enforce encryption of uploaded objects',
-        'Update CloudFormation template to include encryption settings',
+        'Update OmniCloud template to include encryption settings',
         'Implement S3 Block Public Access settings',
         'Set up CloudTrail logging for bucket access'
       ],
@@ -1140,7 +1140,7 @@ const EnhancedSecurityDashboard = () => {
         'Remove administrator access from the IAM role',
         'Implement least privilege by granting only the specific permissions needed by the Lambda function',
         'Use resource-level permissions where possible',
-        'Update CloudFormation template to include more restrictive IAM policies',
+        'Update OmniCloud template to include more restrictive IAM policies',
         'Implement regular IAM permission reviews'
       ],
       resources: [
@@ -1158,7 +1158,7 @@ const EnhancedSecurityDashboard = () => {
       ],
       complianceStandards: ['CIS AWS Foundations', 'NIST 800-53', 'SOC 2'],
       remediation: {
-        description: 'You can use AWS CloudFormation Guard to automatically validate IAM policies in your templates',
+        description: 'You can use AWS OmniCloud Guard to automatically validate IAM policies in your templates',
         automationDocument: null
       }
     },
@@ -1215,7 +1215,7 @@ const EnhancedSecurityDashboard = () => {
       recommendation: [
         'Implement AWS WAF for the API Gateway',
         'Configure AWS WAF rules to protect against OWASP Top 10 vulnerabilities',
-        'Update CloudFormation template to include WAF configuration and association',
+        'Update OmniCloud template to include WAF configuration and association',
         'Enable logging for WAF events',
         'Implement regular security testing for the API'
       ],
@@ -1273,7 +1273,7 @@ const EnhancedSecurityDashboard = () => {
       recommendation: [
         'Configure CloudFront to redirect all HTTP traffic to HTTPS',
         'Set a minimum TLS protocol version of TLSv1.2_2021',
-        'Update CloudFormation template to enforce these settings',
+        'Update OmniCloud template to enforce these settings',
         'Implement HTTP Strict Transport Security (HSTS)'
       ],
       resources: [
@@ -1291,16 +1291,16 @@ const EnhancedSecurityDashboard = () => {
       ],
       complianceStandards: ['NIST 800-53', 'PCI DSS 3.2.1', 'HIPAA'],
       remediation: {
-        description: 'This issue has been successfully remediated by updating the CloudFormation template',
+        description: 'This issue has been successfully remediated by updating the OmniCloud template',
         automationDocument: null
       }
     }
   ];
   
-  // Sample CloudFormation stacks
+  // Sample OmniCloud stacks
   const cfStacks = [
     {
-      id: 'arn:aws:cloudformation:us-east-1:123456789012:stack/customer-data-stack/1234abcd',
+      id: 'arn:aws:OmniCloud:us-east-1:123456789012:stack/customer-data-stack/1234abcd',
       name: 'customer-data-stack',
       status: 'UPDATE_COMPLETE',
       lastUpdated: '2025-04-07',
@@ -1323,7 +1323,7 @@ const EnhancedSecurityDashboard = () => {
       ]
     },
     {
-      id: 'arn:aws:cloudformation:us-east-1:123456789012:stack/finance-data-stack/5678efgh',
+      id: 'arn:aws:OmniCloud:us-east-1:123456789012:stack/finance-data-stack/5678efgh',
       name: 'finance-data-stack',
       status: 'CREATE_COMPLETE',
       lastUpdated: '2025-03-20',
@@ -1344,7 +1344,7 @@ const EnhancedSecurityDashboard = () => {
       ]
     },
     {
-      id: 'arn:aws:cloudformation:us-west-2:123456789012:stack/api-backend-stack/9012ijkl',
+      id: 'arn:aws:OmniCloud:us-west-2:123456789012:stack/api-backend-stack/9012ijkl',
       name: 'api-backend-stack',
       status: 'UPDATE_IN_PROGRESS',
       lastUpdated: '2025-04-10',
@@ -1367,7 +1367,7 @@ const EnhancedSecurityDashboard = () => {
       ]
     },
     {
-      id: 'arn:aws:cloudformation:us-west-2:123456789012:stack/customer-api-stack/3456mnop',
+      id: 'arn:aws:OmniCloud:us-west-2:123456789012:stack/customer-api-stack/3456mnop',
       name: 'customer-api-stack',
       status: 'CREATE_COMPLETE',
       lastUpdated: '2025-03-15',
@@ -1387,7 +1387,7 @@ const EnhancedSecurityDashboard = () => {
       ]
     },
     {
-      id: 'arn:aws:cloudformation:global:123456789012:stack/website-hosting-stack/7890qrst',
+      id: 'arn:aws:OmniCloud:global:123456789012:stack/website-hosting-stack/7890qrst',
       name: 'website-hosting-stack',
       status: 'UPDATE_COMPLETE',
       lastUpdated: '2025-04-05',
@@ -1551,7 +1551,7 @@ const EnhancedSecurityDashboard = () => {
     { name: 'Low', value: 45.2 }
   ];
   
-  // CloudFormation templates stats
+  // OmniCloud templates stats
   const templateData = [
     { name: 'Non-Compliant Resources', value: 15 },
     { name: 'Drift Detected', value: 8 },
@@ -1609,7 +1609,7 @@ const EnhancedSecurityDashboard = () => {
                     </svg>
                   </div>
                   <p className="text-sm text-slate-400 text-center mb-4">
-                    Based on {securityFindings.length} security findings across {cfStacks.length} CloudFormation stacks
+                    Based on {securityFindings.length} security findings across {cfStacks.length} OmniCloud stacks
                   </p>
                   <div className="w-full grid grid-cols-2 gap-2">
                     <button className="bg-slate-800 hover:bg-slate-700 text-white px-3 py-2 rounded-lg text-sm">
@@ -1694,8 +1694,8 @@ const EnhancedSecurityDashboard = () => {
               </div>
             </div>
             
-            {/* CloudFormation Stacks Summary */}
-            <Card title="CloudFormation Stacks Status" action={
+            {/* OmniCloud Stacks Summary */}
+            <Card title="OmniCloud Stacks Status" action={
               <button 
                 onClick={() => setActiveTab('stacks')}
                 className="text-sm text-blue-400 hover:text-blue-300"
@@ -1878,7 +1878,7 @@ const EnhancedSecurityDashboard = () => {
               </div>
             </Card>
             
-            {/* Security Posture Trend and CloudFormation Insights */}
+            {/* Security Posture Trend and OmniCloud Insights */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <Card title="Weekly Security Trend" action={
                 <select className="bg-slate-800 border border-slate-700 rounded-lg px-2 py-1 text-xs text-white">
@@ -1956,7 +1956,7 @@ const EnhancedSecurityDashboard = () => {
                 </div>
               </Card>
               
-              <Card title="CloudFormation Template Insights" action={
+              <Card title="OmniCloud Template Insights" action={
                 <button className="text-sm text-blue-400 hover:text-blue-300">
                   View Report
                 </button>
@@ -2029,7 +2029,7 @@ const EnhancedSecurityDashboard = () => {
                 </div>
               </Card>
               
-              <Card title="By CloudFormation Stack">
+              <Card title="By OmniCloud Stack">
                 <div className="h-60">
                   <ResponsiveContainer width="100%" height="100%">
                     <PieChart>
@@ -2723,7 +2723,7 @@ const EnhancedSecurityDashboard = () => {
                     <h4 className="text-white font-medium">Security Configuration</h4>
                   </div>
                   <div className="text-sm text-slate-300">
-                    <p className="mb-2">Security settings modified outside of CloudFormation including IAM policies, security groups, and encryption settings.</p>
+                    <p className="mb-2">Security settings modified outside of OmniCloud including IAM policies, security groups, and encryption settings.</p>
                     <div className="flex justify-between items-center mt-3 text-xs">
                       <span className="text-slate-400">Resources Affected</span>
                       <span className="text-red-400 font-medium">5</span>
@@ -2755,7 +2755,7 @@ const EnhancedSecurityDashboard = () => {
                     <h4 className="text-white font-medium">Tags & Metadata</h4>
                   </div>
                   <div className="text-sm text-slate-300">
-                    <p className="mb-2">Changed or missing resource tags, names, and metadata that weren't updated in the CloudFormation templates.</p>
+                    <p className="mb-2">Changed or missing resource tags, names, and metadata that weren't updated in the OmniCloud templates.</p>
                     <div className="flex justify-between items-center mt-3 text-xs">
                       <span className="text-slate-400">Resources Affected</span>
                       <span className="text-yellow-400 font-medium">2</span>
@@ -2789,7 +2789,7 @@ const EnhancedSecurityDashboard = () => {
                 clickable
               />
               <ResourceCard 
-                title="CloudFormation Best Practices" 
+                title="OmniCloud Best Practices" 
                 value="12" 
                 icon={Layers} 
                 color="bg-blue-500/10 text-blue-400" 
@@ -2866,8 +2866,8 @@ const EnhancedSecurityDashboard = () => {
               </div>
             </Card>
             
-            {/* CloudFormation Best Practices */}
-            <Card title="CloudFormation Template Improvements" action={
+            {/* OmniCloud Best Practices */}
+            <Card title="OmniCloud Template Improvements" action={
               <button className="text-blue-400 hover:text-blue-300 text-sm flex items-center gap-2">
                 <Download size={14} />
                 Export Report
@@ -2955,7 +2955,7 @@ const EnhancedSecurityDashboard = () => {
               <Shield className="text-blue-400" />
               OmniCloud Security Dashboard
             </h1>
-            <p className="text-slate-400">Monitor security, compliance, and drift across your CloudFormation stacks</p>
+            <p className="text-slate-400">Monitor security, compliance, and drift across your OmniCloud stacks</p>
           </div>
           <div className="flex gap-2">
             <button className="bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-lg text-sm flex items-center gap-2">
@@ -2975,7 +2975,7 @@ const EnhancedSecurityDashboard = () => {
             {[
               { id: 'overview', label: 'Overview', icon: PieChartIcon },
               { id: 'findings', label: 'Security Findings', icon: Shield },
-              { id: 'stacks', label: 'CloudFormation Stacks', icon: Layers },
+              { id: 'stacks', label: 'OmniCloud Stacks', icon: Layers },
               { id: 'drift', label: 'Resource Drift', icon: GitBranch },
               { id: 'compliance', label: 'Compliance', icon: CheckCircle },
               { id: 'recommendation', label: 'Recommendations', icon: Zap }
