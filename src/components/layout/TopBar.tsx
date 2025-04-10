@@ -64,7 +64,6 @@ const TopBar: React.FC<TopBarProps> = ({
           onClick={onToggleNotifications}
           ariaLabel="Notifications"
           badge={notificationCount}
-          children={null}
         />
 
         {/* Settings Button */}
@@ -72,12 +71,10 @@ const TopBar: React.FC<TopBarProps> = ({
 
         {/* Help Button */}
         <Button
-          badge={null}
           variant="icon"
           icon={HelpCircle}
           onClick={onToggleHelpPanel}
           ariaLabel="Help and resources"
-          children={null}
         />
 
         {/* Divider */}

@@ -88,13 +88,12 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({
                 <span className="text-lg font-semibold">OmniCloud</span>
               </div>
               <Button
-                badge={null}
                 variant="icon"
                 size="sm"
                 icon={X}
                 onClick={() => setMobileNavOpen(false)}
                 ariaLabel="Close mobile menu"
-                children={null}
+                children={undefined}
               />
             </div>
 

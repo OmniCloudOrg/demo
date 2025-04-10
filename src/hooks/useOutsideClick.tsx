@@ -7,7 +7,7 @@ type Handler = () => void;
  * @param callback Function to call when a click outside is detected
  * @returns React ref to attach to the element
  */
-export const useOutsideClick = <T extends HTMLElement = HTMLDivElement>(callback: Handler): RefObject<T> => {
+export const useOutsideClick = <T extends HTMLElement = HTMLDivElement>(callback: Handler): RefObject<T | null> => {
   const ref = useRef<T>(null);
 
   useEffect(() => {
@@ -24,7 +24,7 @@ export const useOutsideClick = <T extends HTMLElement = HTMLDivElement>(callback
     };
   }, [callback]);
 
-  return ref as RefObject<T>;
+  return ref;
 };
 
 export default useOutsideClick;
