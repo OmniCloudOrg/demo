@@ -162,7 +162,7 @@ const Info = ({ size, className }) => {
   );
 };
 
-// CF Stack Status Badge
+// OC Stack Status Badge
 const StackStatusBadge = ({ status }) => {
   let bgColor, textColor, icon;
   
@@ -234,7 +234,7 @@ const SecurityFinding = ({ finding, expanded, onToggle, onActionClick }) => {
             }}
             className="px-3 py-1.5 bg-blue-600 rounded-lg text-sm text-white hover:bg-blue-700"
           >
-            {finding.cfFix ? 'Apply CF Patch' : 'Mitigate Now'}
+            {finding.cfFix ? 'Apply OC Patch' : 'Mitigate Now'}
           </button>
         );
       case 'in-progress':
@@ -364,7 +364,7 @@ const SecurityFinding = ({ finding, expanded, onToggle, onActionClick }) => {
               </div>
               {finding.cfResourceId && (
                 <div>
-                  <div className="text-slate-500 mb-1">CF Logical ID</div>
+                  <div className="text-slate-500 mb-1">OC Logical ID</div>
                   <div className="font-mono text-xs">{finding.cfResourceId}</div>
                 </div>
               )}
