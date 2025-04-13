@@ -288,3 +288,38 @@ export const StatsCard = ({ label, value, icon: Icon, color = "blue" }) => {
     </div>
   );
 };
+
+/**
+ * Card - A reusable card component for displaying various types of content
+ * Used across dashboard pages for displaying detailed information
+ */
+export const Card = ({ 
+  title, 
+  subtitle, 
+  icon: Icon, 
+  actions, 
+  children, 
+  className = ""
+}) => {
+  return (
+    <div className={`bg-slate-900/50 backdrop-blur border border-slate-800 rounded-xl p-6 ${className}`}>
+      <div className="flex items-start gap-3 mb-4">
+        {Icon && (
+          <div className="p-3 bg-blue-500/10 text-blue-400 rounded-lg">
+            <Icon size={20} />
+          </div>
+        )}
+        <div>
+          <h3 className="text-lg font-semibold text-white">{title}</h3>
+          {subtitle && (
+            <div className="text-sm text-slate-400 mt-0.5">{subtitle}</div>
+          )}
+        </div>
+        <div className="ml-auto flex-none">
+          {actions}
+        </div>
+      </div>
+      {children}
+    </div>
+  );
+}

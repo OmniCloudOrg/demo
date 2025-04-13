@@ -232,11 +232,19 @@ export const ToggleSwitch = ({
   className = "",
   disabled = false
 }) => {
+  // Create a proper handler function that correctly passes the event
+  const handleChange = (e) => {
+    if (disabled) return;
+    // Call the provided onToggle with the event
+    // This ensures the parent component gets the correct event data
+    onToggle(e);
+  };
+  
   return (
     <div className={`flex items-center justify-between ${className}`}>
-      <div>
+      <div className="flex-1">
         {label && (
-          <label htmlFor={id} className="text-sm text-slate-300">
+          <label htmlFor={id} className="text-sm text-slate-300 cursor-pointer">
             {label}
           </label>
         )}
@@ -244,28 +252,34 @@ export const ToggleSwitch = ({
           <p className="text-xs text-slate-500 mt-0.5">{description}</p>
         )}
       </div>
-      <div className="relative inline-block w-10 mr-2 align-middle select-none">
+      <label 
+        htmlFor={id}
+        className={`relative inline-block w-10 h-6 ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
+      >
         <input 
           type="checkbox" 
           name={id}
           id={id} 
           checked={isOn}
-          onChange={onToggle}
+          onChange={handleChange}
           disabled={disabled}
           className="sr-only"
         />
-        <label 
-          htmlFor={id} 
-          className={`block overflow-hidden h-6 rounded-full cursor-pointer ${disabled ? 'opacity-50' : ''}`}
-        >
-          <span 
-            className={`block w-6 h-6 rounded-full transition-transform duration-200 ease-in-out transform ${
-              isOn ? 'translate-x-4 bg-blue-500' : 'translate-x-0 bg-slate-400'
-            } ${disabled ? 'cursor-not-allowed' : ''}`}
-          />
-          <span className="absolute inset-0 bg-slate-700 rounded-full -z-10"></span>
-        </label>
-      </div>
+        <div className={`
+          absolute inset-0 
+          rounded-full 
+          transition-colors duration-200 ease-in-out
+          ${isOn ? 'bg-blue-500' : 'bg-slate-700'}
+        `}></div>
+        <div className={`
+          absolute w-5 h-5 
+          bg-white rounded-full 
+          shadow-md
+          top-0.5 left-0.5
+          transition-transform duration-200 ease-in-out
+          ${isOn ? 'transform translate-x-4' : ''}
+        `}></div>
+      </label>
     </div>
   );
 };
