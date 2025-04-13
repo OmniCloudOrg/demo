@@ -131,7 +131,7 @@ export const useSecurityData = (
     { name: 'Low', value: 45.2 }
   ];
   
-  // CloudFormation templates stats
+  // OmniCloud templates stats
   const templateData = [
     { name: 'Non-Compliant Resources', value: 15 },
     { name: 'Drift Detected', value: 8 },

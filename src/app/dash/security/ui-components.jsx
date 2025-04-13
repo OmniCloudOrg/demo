@@ -178,7 +178,7 @@ export const SecurityFinding = ({ finding, expanded, onToggle, onActionClick }) 
           
           {finding.cfFix && (
             <div className="bg-slate-900 p-4 rounded-lg text-sm">
-              <div className="text-white font-medium mb-1">CloudFormation Patch:</div>
+              <div className="text-white font-medium mb-1">OmniCloud Patch:</div>
               <div className="bg-slate-800 p-3 rounded text-xs font-mono text-slate-300 overflow-x-auto">
                 <pre>{finding.cfFix}</pre>
               </div>
@@ -267,7 +267,7 @@ export const SecurityFinding = ({ finding, expanded, onToggle, onActionClick }) 
   );
 };
 
-// CloudFormation stack item component
+// OmniCloud stack item component
 export const StackItem = ({ stack, expanded, onToggle, onViewResources, onViewTemplate }) => {
   return (
     <div 
@@ -421,7 +421,7 @@ export const StackItem = ({ stack, expanded, onToggle, onViewResources, onViewTe
                     <span className="font-medium">{stack.driftedResources} resources have drifted from the template</span>
                   </div>
                   <p className="text-xs text-slate-300 ml-6">
-                    Resources were modified outside of CloudFormation and no longer match the template definition.
+                    Resources were modified outside of OmniCloud and no longer match the template definition.
                   </p>
                   <div className="mt-2 flex justify-end">
                     <button className="px-3 py-1 bg-purple-600 hover:bg-purple-700 rounded text-white text-xs">
@@ -495,7 +495,7 @@ export const ComplianceCheckItem = ({ check, onToggleDetails }) => {
   );
 };
 
-// CloudFormation resource drift component
+// OmniCloud resource drift component
 export const ResourceDrift = ({ resource }) => {
   return (
     <div className="bg-slate-800/40 p-3 rounded-lg mb-3">

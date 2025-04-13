@@ -180,7 +180,7 @@ const EnhancedSecurityDashboard = () => {
               <Shield className="text-blue-400" />
               OmniCloud Security Dashboard
             </h1>
-            <p className="text-slate-400">Monitor security, compliance, and drift across your CloudFormation stacks</p>
+            <p className="text-slate-400">Monitor security, compliance, and drift across your OmniCloud stacks</p>
           </div>
           <div className="flex gap-2">
             <button className="bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-lg text-sm flex items-center gap-2">

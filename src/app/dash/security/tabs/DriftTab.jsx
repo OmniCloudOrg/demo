@@ -169,7 +169,7 @@ export const DriftTab = (props) => {
               <h4 className="text-white font-medium">Security Configuration</h4>
             </div>
             <div className="text-sm text-slate-300">
-              <p className="mb-2">Security settings modified outside of CloudFormation including IAM policies, security groups, and encryption settings.</p>
+              <p className="mb-2">Security settings modified outside of OmniCloud including IAM policies, security groups, and encryption settings.</p>
               <div className="flex justify-between items-center mt-3 text-xs">
                 <span className="text-slate-400">Resources Affected</span>
                 <span className="text-red-400 font-medium">5</span>
@@ -201,7 +201,7 @@ export const DriftTab = (props) => {
               <h4 className="text-white font-medium">Tags & Metadata</h4>
             </div>
             <div className="text-sm text-slate-300">
-              <p className="mb-2">Changed or missing resource tags, names, and metadata that weren't updated in the CloudFormation templates.</p>
+              <p className="mb-2">Changed or missing resource tags, names, and metadata that weren't updated in the OmniCloud templates.</p>
               <div className="flex justify-between items-center mt-3 text-xs">
                 <span className="text-slate-400">Resources Affected</span>
                 <span className="text-yellow-400 font-medium">2</span>

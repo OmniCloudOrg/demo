@@ -1,4 +1,4 @@
-// Mock CloudFormation stacks data with realistic security and drift information
+// Mock OmniCloud stacks data with realistic security and drift information
 export const mockCfStacks = [
   {
     id: 'arn:aws:cloudformation:us-east-1:123456789012:stack/customer-data-stack/unique-stack-id-1',
