@@ -323,3 +323,254 @@ export const Card = ({
     </div>
   );
 }
+
+/**
+ * ResourceTypeCard - A card component for displaying resource type summaries
+ */
+const ResourceTypeCard = ({ 
+  title, 
+  count, 
+  icon: Icon, 
+  status,
+  percentage,
+  color = "blue"
+}) => {
+  const colorClasses = {
+    blue: "bg-blue-500/10 text-blue-400",
+    green: "bg-green-500/10 text-green-400",
+    red: "bg-red-500/10 text-red-400",
+    yellow: "bg-yellow-500/10 text-yellow-400",
+    purple: "bg-purple-500/10 text-purple-400",
+    orange: "bg-orange-500/10 text-orange-400",
+    indigo: "bg-indigo-500/10 text-indigo-400",
+    cyan: "bg-cyan-500/10 text-cyan-400"
+  };
+
+  return (
+    <div className="bg-slate-900/50 backdrop-blur border border-slate-800 rounded-xl p-5">
+      <div className="flex justify-between items-start mb-3">
+        <div className={`p-2 rounded-lg ${colorClasses[color]}`}>
+          <Icon size={18} />
+        </div>
+        {status && <StatusBadge status={status} />}
+      </div>
+      <div className="mb-2">
+        <h3 className="text-xl font-semibold text-white">{count}</h3>
+        <p className="text-sm text-slate-400">{title}</p>
+      </div>
+      {percentage !== undefined && (
+        <ProgressBar 
+          value={percentage} 
+          status={status || 'active'} 
+          showLabel={true}
+          size="sm"
+        />
+      )}
+    </div>
+  );
+};
+
+/**
+ * ResourceCard - A reusable card component for displaying resource information
+ */
+export const ResourceCard = ({ 
+  resource, 
+  onSelect, 
+  type = "compute" 
+}) => {
+  // Safety check - if resource is undefined or null, return a placeholder or null
+  if (!resource) {
+    return null; // Or a placeholder component
+  }
+
+  // Determine icon based on resource type
+  const getIcon = () => {
+    switch (type) {
+      case 'compute': return Server;
+      case 'storage': return HardDrive;
+      case 'database': return Database;
+      case 'network': return Network;
+      default: return Server;
+    }
+  };
+
+  const Icon = getIcon();
+
+  return (
+    <div 
+      className="bg-slate-900/50 backdrop-blur border border-slate-800 rounded-xl p-5 hover:border-blue-500/30 transition-all cursor-pointer"
+      onClick={() => onSelect && onSelect(resource)}
+    >
+      <div className="flex justify-between items-start mb-3">
+        <div className="flex items-start gap-3">
+          <div className="p-2 bg-blue-500/10 text-blue-400 rounded-lg">
+            <Icon size={18} />
+          </div>
+          <div>
+            <h3 className="text-base font-semibold text-white truncate">{resource.name || 'Unnamed Resource'}</h3>
+            <div className="text-xs text-slate-400 mt-0.5">{resource.id || 'No ID'}</div>
+          </div>
+        </div>
+        <StatusBadge status={resource.status || 'unknown'} />
+      </div>
+      
+      <div className="grid grid-cols-2 gap-3 mb-3">
+        {resource.specs && Object.entries(resource.specs).map(([key, value], idx) => (
+          <div key={idx}>
+            <div className="text-xs text-slate-500 mb-1 capitalize">{key}</div>
+            <div className="text-sm text-white">{value}</div>
+          </div>
+        ))}
+      </div>
+      
+      {(resource.cpu !== undefined || resource.memory !== undefined) && (
+        <div className="space-y-2 mt-3">
+          {resource.cpu !== undefined && (
+            <div>
+              <div className="flex justify-between text-xs text-slate-500 mb-1">
+                <span>CPU</span>
+                <span>{resource.cpu}%</span>
+              </div>
+              <ProgressBar value={resource.cpu} size="sm" />
+            </div>
+          )}
+          {resource.memory !== undefined && (
+            <div>
+              <div className="flex justify-between text-xs text-slate-500 mb-1">
+                <span>Memory</span>
+                <span>{resource.memory}%</span>
+              </div>
+              <ProgressBar value={resource.memory} size="sm" />
+            </div>
+          )}
+        </div>
+      )}
+      
+      <div className="flex items-center justify-between text-xs mt-3 pt-3 border-t border-slate-800">
+        <div className="flex items-center gap-1 text-slate-400">
+          <Clock size={12} />
+          <span>Last updated: {resource.lastUpdated || "Just now"}</span>
+        </div>
+        <div className="text-blue-400 hover:text-blue-300">
+          View Details
+        </div>
+      </div>
+    </div>
+  );
+};
+
+/**
+ * ResourceSummary - A component that shows summary statistics of resources
+ */
+const ResourceSummary = ({ 
+  title, 
+  stats = [], 
+  chartData, 
+  className = "" 
+}) => {
+  return (
+    <div className={`bg-slate-900/50 backdrop-blur border border-slate-800 rounded-xl p-5 ${className}`}>
+      <div className="flex items-center justify-between mb-4">
+        <h3 className="text-lg font-medium text-white">{title}</h3>
+        {chartData && (
+          <button className="text-blue-400 hover:text-blue-300 text-sm">
+            View Details
+          </button>
+        )}
+      </div>
+      
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {stats.map((stat, idx) => (
+          <div key={idx} className="space-y-1">
+            <div className="flex items-center gap-2">
+              {stat.icon && (
+                <stat.icon size={14} className={`text-${stat.color || 'blue'}-400`} />
+              )}
+              <div className="text-sm text-slate-400">{stat.label}</div>
+            </div>
+            <div className="text-xl font-semibold text-white">{stat.value}</div>
+            {stat.change && (
+              <div className={`text-xs ${stat.change > 0 ? 'text-green-400' : 'text-red-400'}`}>
+                {stat.change > 0 ? '+' : ''}{stat.change}% from last week
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+      
+      {chartData && (
+        <div className="h-48 mt-4">
+          {/* Chart would be rendered here */}
+          {/* For example: <LineChartComponent data={chartData} /> */}
+        </div>
+      )}
+    </div>
+  );
+};
+
+/**
+ * ResourceCards - A main component that renders different resource card layouts
+ */
+const ResourceCards = ({
+  resourceTypes,
+  resources,
+  layout = "grid",
+  columns = 4,
+  onSelectResource,
+  resourceTypesTitle = "Resource Types",
+  resourceListTitle = "Resource Instances"
+}) => {
+  return (
+    <div className="space-y-6">
+      {resourceTypes?.length > 0 && (
+        <div className="space-y-4">
+          <h3 className="text-lg font-medium text-white">{resourceTypesTitle}</h3>
+          <DashboardGrid columns={columns} gap={4}>
+            {resourceTypes.map((type, idx) => (
+              <ResourceTypeCard
+                key={idx}
+                title={type.title}
+                count={type.count}
+                icon={type.icon}
+                status={type.status}
+                percentage={type.percentage}
+                color={type.color || "blue"}
+              />
+            ))}
+          </DashboardGrid>
+        </div>
+      )}
+      
+      {resources?.length > 0 && (
+        <div className="space-y-4">
+          <h3 className="text-lg font-medium text-white">{resourceListTitle}</h3>
+          {layout === "grid" ? (
+            <DashboardGrid columns={Math.min(columns, 3)} gap={4}>
+              {resources.map((resource, idx) => (
+                <ResourceCard
+                  key={idx}
+                  resource={resource}
+                  onSelect={onSelectResource}
+                  type={resource.type}
+                />
+              ))}
+            </DashboardGrid>
+          ) : (
+            <div className="space-y-3">
+              {resources.map((resource, idx) => (
+                <ResourceCard
+                  key={idx}
+                  resource={resource}
+                  onSelect={onSelectResource}
+                  type={resource.type}
+                />
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+};
+
+export { ResourceCards, ResourceTypeCard, ResourceCard, ResourceSummary };
